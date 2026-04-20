@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP – Adil’s 29th</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #111; color: white; }
+    form { background: #222; padding: 30px; border-radius: 8px; display: inline-block; }
+    input, button { margin: 10px; padding: 10px; border-radius: 4px; border: none; }
+    button { background: #00c853; color: white; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>RSVP Now</h2>
+  <form id="rsvpForm">
+    <input type="text" name="name" placeholder="Your Name" required><br>
+    <input type="email" name="email" placeholder="Your Email" required><br>
+    <label>
+      <input type="radio" name="attending" value="Yes" required> Yes, I’ll be there!
+    </label>
+    <label>
+      <input type="radio" name="attending" value="No" required> Sorry, can’t make it.
+    </label><br>
+    <button type="submit">Send RSVP</button>
+  </form>
+  <p id="responseMessage"></p>
+  <script src="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js)"></script>
+  <script>
+  const form = document.getElementById('rsvpForm');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    fetch(https://script.google.com/macros/s/AKfycbxhsjIMy-xEJjEmzfEfuw77RycZtLEsuTjRl3RS_Mm0NN0ko3TI2fK25roECSb5Ow/exec, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(res => res.json())
+    .then(response => {
+      document.getElementById('responseMessage').innerText = '🎉 RSVP submitted successfully!';
+      // confetti burst
+      confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
+      form.reset();
+    })
+    .catch(err => {
+      document.getElementById('responseMessage').innerText = '⚠️ There was an error sending your RSVP.';
+      console.error(err);
+    });
+  });
+  </script>
+</body>
+</html>
