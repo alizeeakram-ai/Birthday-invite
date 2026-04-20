@@ -123,6 +123,43 @@ function showCard() {
 }
 typeLine();
 </script>
-
+<button id="rsvpButton"> RSVP</button>
+<!-- Confetti effect -->
+<script src="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js)"></script>
+<script>
+  const button = document.getElementById('rsvpButton');
+  button.addEventListener('click', () => {
+    // Launches confetti from the center
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+    // Optional: redirect to your RSVP link after confetti
+    setTimeout(() => {
+      window.open('[forms.gle](https://forms.gle/YOUR-RSVP-FORM)', '_blank');
+    }, 800);
+  });
+</script>
+    let duration = 3 * 1000;
+let end = Date.now() + duration;
+(function frame() {
+  confetti({
+    particleCount: 4,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0 }
+  });
+  confetti({
+    particleCount: 4,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1 }
+  });
+  
+  if (Date.now() < end) {
+    requestAnimationFrame(frame);
+  }
+})();
 </body>
-</html>
+
